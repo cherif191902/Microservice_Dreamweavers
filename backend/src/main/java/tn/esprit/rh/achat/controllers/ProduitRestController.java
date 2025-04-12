@@ -34,7 +34,7 @@ public class ProduitRestController {
 	}
 
 	/* Ajouter en produit tout en lui affectant la catégorie produit et le stock associés */
-	// http://localhost:8089/SpringMVC/produit/add-produit/{idCategorieProduit}/{idStock}
+	// http://localhost:8089/SpringMVC/produit/add-produit
 	@PostMapping("/add-produit")
 	@ResponseBody
 	public Produit addProduit(@RequestBody Produit p) {

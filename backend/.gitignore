@@ -29,5 +29,14 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Ignorer les fichiers générés par Docker
+*.env
+*.log
+docker-compose.override.yml
+
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
+
 ### VS Code ###
 .vscode/
