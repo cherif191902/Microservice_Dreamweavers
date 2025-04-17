@@ -1,0 +1,1334 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+.gitattributes
+.gitignore
+.mvn/wrapper/maven-wrapper.properties
+docker-compose.yml
+mvnw
+mvnw.cmd
+pom.xml
+src/main/java/com/oumeima/productservice/controller/ProductController.java
+src/main/java/com/oumeima/productservice/exception/ProductNotFoundException.java
+src/main/java/com/oumeima/productservice/file/FileStorageService.java
+src/main/java/com/oumeima/productservice/file/FileUtils.java
+src/main/java/com/oumeima/productservice/mapper/ProductMapper.java
+src/main/java/com/oumeima/productservice/model/Category.java
+src/main/java/com/oumeima/productservice/model/Product.java
+src/main/java/com/oumeima/productservice/ProductServiceApplication.java
+src/main/java/com/oumeima/productservice/repository/CategoryRepository.java
+src/main/java/com/oumeima/productservice/repository/ProductRepository.java
+src/main/java/com/oumeima/productservice/request/ProductPurchaseRequest.java
+src/main/java/com/oumeima/productservice/request/ProductRequest.java
+src/main/java/com/oumeima/productservice/response/ProductPurchaseResponse.java
+src/main/java/com/oumeima/productservice/response/ProductResponse.java
+src/main/java/com/oumeima/productservice/service/ProductService.java
+src/main/resources/application.yml
+src/main/resources/application.yml~
+src/test/java/com/oumeima/productservice/ProductServiceApplicationTests.java
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitattributes">
+/mvnw text eol=lf
+*.cmd text eol=crlf
+</file>
+
+<file path=".gitignore">
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+</file>
+
+<file path=".mvn/wrapper/maven-wrapper.properties">
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+wrapperVersion=3.3.2
+distributionType=only-script
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.9/apache-maven-3.9.9-bin.zip
+</file>
+
+<file path="docker-compose.yml">
+version: '3.8'
+
+services:
+
+
+  mongo:
+    container_name: mongo_v3
+
+    image: mongo
+    ports:
+      - 27017:27017
+
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: oumeima
+      MONGO_INITDB_ROOT_PASSWORD: oumeima
+    networks:
+      - microservices-net
+
+  mongo-express:
+    container_name: mongo-express_v3
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+
+      ME_CONFIG_MONGODB_ADMINUSERNAME: attia
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: attia
+      ME_CONFIG_MONGODB_URL: mongodb://attia:attia@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+
+
+    networks:
+      - microservices-net
+    depends_on:
+      - mongo
+
+
+
+
+
+
+
+
+networks:
+  microservices-net:
+    driver: bridge
+</file>
+
+<file path="mvnw">
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Apache Maven Wrapper startup batch script, version 3.3.2
+#
+# Optional ENV vars
+# -----------------
+#   JAVA_HOME - location of a JDK home dir, required when download maven via java source
+#   MVNW_REPOURL - repo url base for downloading maven distribution
+#   MVNW_USERNAME/MVNW_PASSWORD - user and password for downloading maven
+#   MVNW_VERBOSE - true: enable verbose log; debug: trace the mvnw script; others: silence the output
+# ----------------------------------------------------------------------------
+
+set -euf
+[ "${MVNW_VERBOSE-}" != debug ] || set -x
+
+# OS specific support.
+native_path() { printf %s\\n "$1"; }
+case "$(uname)" in
+CYGWIN* | MINGW*)
+  [ -z "${JAVA_HOME-}" ] || JAVA_HOME="$(cygpath --unix "$JAVA_HOME")"
+  native_path() { cygpath --path --windows "$1"; }
+  ;;
+esac
+
+# set JAVACMD and JAVACCMD
+set_java_home() {
+  # For Cygwin and MinGW, ensure paths are in Unix format before anything is touched
+  if [ -n "${JAVA_HOME-}" ]; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ]; then
+      # IBM's JDK on AIX uses strange locations for the executables
+      JAVACMD="$JAVA_HOME/jre/sh/java"
+      JAVACCMD="$JAVA_HOME/jre/sh/javac"
+    else
+      JAVACMD="$JAVA_HOME/bin/java"
+      JAVACCMD="$JAVA_HOME/bin/javac"
+
+      if [ ! -x "$JAVACMD" ] || [ ! -x "$JAVACCMD" ]; then
+        echo "The JAVA_HOME environment variable is not defined correctly, so mvnw cannot run." >&2
+        echo "JAVA_HOME is set to \"$JAVA_HOME\", but \"\$JAVA_HOME/bin/java\" or \"\$JAVA_HOME/bin/javac\" does not exist." >&2
+        return 1
+      fi
+    fi
+  else
+    JAVACMD="$(
+      'set' +e
+      'unset' -f command 2>/dev/null
+      'command' -v java
+    )" || :
+    JAVACCMD="$(
+      'set' +e
+      'unset' -f command 2>/dev/null
+      'command' -v javac
+    )" || :
+
+    if [ ! -x "${JAVACMD-}" ] || [ ! -x "${JAVACCMD-}" ]; then
+      echo "The java/javac command does not exist in PATH nor is JAVA_HOME set, so mvnw cannot run." >&2
+      return 1
+    fi
+  fi
+}
+
+# hash string like Java String::hashCode
+hash_string() {
+  str="${1:-}" h=0
+  while [ -n "$str" ]; do
+    char="${str%"${str#?}"}"
+    h=$(((h * 31 + $(LC_CTYPE=C printf %d "'$char")) % 4294967296))
+    str="${str#?}"
+  done
+  printf %x\\n $h
+}
+
+verbose() { :; }
+[ "${MVNW_VERBOSE-}" != true ] || verbose() { printf %s\\n "${1-}"; }
+
+die() {
+  printf %s\\n "$1" >&2
+  exit 1
+}
+
+trim() {
+  # MWRAPPER-139:
+  #   Trims trailing and leading whitespace, carriage returns, tabs, and linefeeds.
+  #   Needed for removing poorly interpreted newline sequences when running in more
+  #   exotic environments such as mingw bash on Windows.
+  printf "%s" "${1}" | tr -d '[:space:]'
+}
+
+# parse distributionUrl and optional distributionSha256Sum, requires .mvn/wrapper/maven-wrapper.properties
+while IFS="=" read -r key value; do
+  case "${key-}" in
+  distributionUrl) distributionUrl=$(trim "${value-}") ;;
+  distributionSha256Sum) distributionSha256Sum=$(trim "${value-}") ;;
+  esac
+done <"${0%/*}/.mvn/wrapper/maven-wrapper.properties"
+[ -n "${distributionUrl-}" ] || die "cannot read distributionUrl property in ${0%/*}/.mvn/wrapper/maven-wrapper.properties"
+
+case "${distributionUrl##*/}" in
+maven-mvnd-*bin.*)
+  MVN_CMD=mvnd.sh _MVNW_REPO_PATTERN=/maven/mvnd/
+  case "${PROCESSOR_ARCHITECTURE-}${PROCESSOR_ARCHITEW6432-}:$(uname -a)" in
+  *AMD64:CYGWIN* | *AMD64:MINGW*) distributionPlatform=windows-amd64 ;;
+  :Darwin*x86_64) distributionPlatform=darwin-amd64 ;;
+  :Darwin*arm64) distributionPlatform=darwin-aarch64 ;;
+  :Linux*x86_64*) distributionPlatform=linux-amd64 ;;
+  *)
+    echo "Cannot detect native platform for mvnd on $(uname)-$(uname -m), use pure java version" >&2
+    distributionPlatform=linux-amd64
+    ;;
+  esac
+  distributionUrl="${distributionUrl%-bin.*}-$distributionPlatform.zip"
+  ;;
+maven-mvnd-*) MVN_CMD=mvnd.sh _MVNW_REPO_PATTERN=/maven/mvnd/ ;;
+*) MVN_CMD="mvn${0##*/mvnw}" _MVNW_REPO_PATTERN=/org/apache/maven/ ;;
+esac
+
+# apply MVNW_REPOURL and calculate MAVEN_HOME
+# maven home pattern: ~/.m2/wrapper/dists/{apache-maven-<version>,maven-mvnd-<version>-<platform>}/<hash>
+[ -z "${MVNW_REPOURL-}" ] || distributionUrl="$MVNW_REPOURL$_MVNW_REPO_PATTERN${distributionUrl#*"$_MVNW_REPO_PATTERN"}"
+distributionUrlName="${distributionUrl##*/}"
+distributionUrlNameMain="${distributionUrlName%.*}"
+distributionUrlNameMain="${distributionUrlNameMain%-bin}"
+MAVEN_USER_HOME="${MAVEN_USER_HOME:-${HOME}/.m2}"
+MAVEN_HOME="${MAVEN_USER_HOME}/wrapper/dists/${distributionUrlNameMain-}/$(hash_string "$distributionUrl")"
+
+exec_maven() {
+  unset MVNW_VERBOSE MVNW_USERNAME MVNW_PASSWORD MVNW_REPOURL || :
+  exec "$MAVEN_HOME/bin/$MVN_CMD" "$@" || die "cannot exec $MAVEN_HOME/bin/$MVN_CMD"
+}
+
+if [ -d "$MAVEN_HOME" ]; then
+  verbose "found existing MAVEN_HOME at $MAVEN_HOME"
+  exec_maven "$@"
+fi
+
+case "${distributionUrl-}" in
+*?-bin.zip | *?maven-mvnd-?*-?*.zip) ;;
+*) die "distributionUrl is not valid, must match *-bin.zip or maven-mvnd-*.zip, but found '${distributionUrl-}'" ;;
+esac
+
+# prepare tmp dir
+if TMP_DOWNLOAD_DIR="$(mktemp -d)" && [ -d "$TMP_DOWNLOAD_DIR" ]; then
+  clean() { rm -rf -- "$TMP_DOWNLOAD_DIR"; }
+  trap clean HUP INT TERM EXIT
+else
+  die "cannot create temp dir"
+fi
+
+mkdir -p -- "${MAVEN_HOME%/*}"
+
+# Download and Install Apache Maven
+verbose "Couldn't find MAVEN_HOME, downloading and installing it ..."
+verbose "Downloading from: $distributionUrl"
+verbose "Downloading to: $TMP_DOWNLOAD_DIR/$distributionUrlName"
+
+# select .zip or .tar.gz
+if ! command -v unzip >/dev/null; then
+  distributionUrl="${distributionUrl%.zip}.tar.gz"
+  distributionUrlName="${distributionUrl##*/}"
+fi
+
+# verbose opt
+__MVNW_QUIET_WGET=--quiet __MVNW_QUIET_CURL=--silent __MVNW_QUIET_UNZIP=-q __MVNW_QUIET_TAR=''
+[ "${MVNW_VERBOSE-}" != true ] || __MVNW_QUIET_WGET='' __MVNW_QUIET_CURL='' __MVNW_QUIET_UNZIP='' __MVNW_QUIET_TAR=v
+
+# normalize http auth
+case "${MVNW_PASSWORD:+has-password}" in
+'') MVNW_USERNAME='' MVNW_PASSWORD='' ;;
+has-password) [ -n "${MVNW_USERNAME-}" ] || MVNW_USERNAME='' MVNW_PASSWORD='' ;;
+esac
+
+if [ -z "${MVNW_USERNAME-}" ] && command -v wget >/dev/null; then
+  verbose "Found wget ... using wget"
+  wget ${__MVNW_QUIET_WGET:+"$__MVNW_QUIET_WGET"} "$distributionUrl" -O "$TMP_DOWNLOAD_DIR/$distributionUrlName" || die "wget: Failed to fetch $distributionUrl"
+elif [ -z "${MVNW_USERNAME-}" ] && command -v curl >/dev/null; then
+  verbose "Found curl ... using curl"
+  curl ${__MVNW_QUIET_CURL:+"$__MVNW_QUIET_CURL"} -f -L -o "$TMP_DOWNLOAD_DIR/$distributionUrlName" "$distributionUrl" || die "curl: Failed to fetch $distributionUrl"
+elif set_java_home; then
+  verbose "Falling back to use Java to download"
+  javaSource="$TMP_DOWNLOAD_DIR/Downloader.java"
+  targetZip="$TMP_DOWNLOAD_DIR/$distributionUrlName"
+  cat >"$javaSource" <<-END
+	public class Downloader extends java.net.Authenticator
+	{
+	  protected java.net.PasswordAuthentication getPasswordAuthentication()
+	  {
+	    return new java.net.PasswordAuthentication( System.getenv( "MVNW_USERNAME" ), System.getenv( "MVNW_PASSWORD" ).toCharArray() );
+	  }
+	  public static void main( String[] args ) throws Exception
+	  {
+	    setDefault( new Downloader() );
+	    java.nio.file.Files.copy( java.net.URI.create( args[0] ).toURL().openStream(), java.nio.file.Paths.get( args[1] ).toAbsolutePath().normalize() );
+	  }
+	}
+	END
+  # For Cygwin/MinGW, switch paths to Windows format before running javac and java
+  verbose " - Compiling Downloader.java ..."
+  "$(native_path "$JAVACCMD")" "$(native_path "$javaSource")" || die "Failed to compile Downloader.java"
+  verbose " - Running Downloader.java ..."
+  "$(native_path "$JAVACMD")" -cp "$(native_path "$TMP_DOWNLOAD_DIR")" Downloader "$distributionUrl" "$(native_path "$targetZip")"
+fi
+
+# If specified, validate the SHA-256 sum of the Maven distribution zip file
+if [ -n "${distributionSha256Sum-}" ]; then
+  distributionSha256Result=false
+  if [ "$MVN_CMD" = mvnd.sh ]; then
+    echo "Checksum validation is not supported for maven-mvnd." >&2
+    echo "Please disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
+    exit 1
+  elif command -v sha256sum >/dev/null; then
+    if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | sha256sum -c >/dev/null 2>&1; then
+      distributionSha256Result=true
+    fi
+  elif command -v shasum >/dev/null; then
+    if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | shasum -a 256 -c >/dev/null 2>&1; then
+      distributionSha256Result=true
+    fi
+  else
+    echo "Checksum validation was requested but neither 'sha256sum' or 'shasum' are available." >&2
+    echo "Please install either command, or disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
+    exit 1
+  fi
+  if [ $distributionSha256Result = false ]; then
+    echo "Error: Failed to validate Maven distribution SHA-256, your Maven distribution might be compromised." >&2
+    echo "If you updated your Maven version, you need to update the specified distributionSha256Sum property." >&2
+    exit 1
+  fi
+fi
+
+# unzip and move
+if command -v unzip >/dev/null; then
+  unzip ${__MVNW_QUIET_UNZIP:+"$__MVNW_QUIET_UNZIP"} "$TMP_DOWNLOAD_DIR/$distributionUrlName" -d "$TMP_DOWNLOAD_DIR" || die "failed to unzip"
+else
+  tar xzf${__MVNW_QUIET_TAR:+"$__MVNW_QUIET_TAR"} "$TMP_DOWNLOAD_DIR/$distributionUrlName" -C "$TMP_DOWNLOAD_DIR" || die "failed to untar"
+fi
+printf %s\\n "$distributionUrl" >"$TMP_DOWNLOAD_DIR/$distributionUrlNameMain/mvnw.url"
+mv -- "$TMP_DOWNLOAD_DIR/$distributionUrlNameMain" "$MAVEN_HOME" || [ -d "$MAVEN_HOME" ] || die "fail to move MAVEN_HOME"
+
+clean || :
+exec_maven "$@"
+</file>
+
+<file path="mvnw.cmd">
+<# : batch portion
+@REM ----------------------------------------------------------------------------
+@REM Licensed to the Apache Software Foundation (ASF) under one
+@REM or more contributor license agreements.  See the NOTICE file
+@REM distributed with this work for additional information
+@REM regarding copyright ownership.  The ASF licenses this file
+@REM to you under the Apache License, Version 2.0 (the
+@REM "License"); you may not use this file except in compliance
+@REM with the License.  You may obtain a copy of the License at
+@REM
+@REM    http://www.apache.org/licenses/LICENSE-2.0
+@REM
+@REM Unless required by applicable law or agreed to in writing,
+@REM software distributed under the License is distributed on an
+@REM "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+@REM KIND, either express or implied.  See the License for the
+@REM specific language governing permissions and limitations
+@REM under the License.
+@REM ----------------------------------------------------------------------------
+
+@REM ----------------------------------------------------------------------------
+@REM Apache Maven Wrapper startup batch script, version 3.3.2
+@REM
+@REM Optional ENV vars
+@REM   MVNW_REPOURL - repo url base for downloading maven distribution
+@REM   MVNW_USERNAME/MVNW_PASSWORD - user and password for downloading maven
+@REM   MVNW_VERBOSE - true: enable verbose log; others: silence the output
+@REM ----------------------------------------------------------------------------
+
+@IF "%__MVNW_ARG0_NAME__%"=="" (SET __MVNW_ARG0_NAME__=%~nx0)
+@SET __MVNW_CMD__=
+@SET __MVNW_ERROR__=
+@SET __MVNW_PSMODULEP_SAVE=%PSModulePath%
+@SET PSModulePath=
+@FOR /F "usebackq tokens=1* delims==" %%A IN (`powershell -noprofile "& {$scriptDir='%~dp0'; $script='%__MVNW_ARG0_NAME__%'; icm -ScriptBlock ([Scriptblock]::Create((Get-Content -Raw '%~f0'))) -NoNewScope}"`) DO @(
+  IF "%%A"=="MVN_CMD" (set __MVNW_CMD__=%%B) ELSE IF "%%B"=="" (echo %%A) ELSE (echo %%A=%%B)
+)
+@SET PSModulePath=%__MVNW_PSMODULEP_SAVE%
+@SET __MVNW_PSMODULEP_SAVE=
+@SET __MVNW_ARG0_NAME__=
+@SET MVNW_USERNAME=
+@SET MVNW_PASSWORD=
+@IF NOT "%__MVNW_CMD__%"=="" (%__MVNW_CMD__% %*)
+@echo Cannot start maven from wrapper >&2 && exit /b 1
+@GOTO :EOF
+: end batch / begin powershell #>
+
+$ErrorActionPreference = "Stop"
+if ($env:MVNW_VERBOSE -eq "true") {
+  $VerbosePreference = "Continue"
+}
+
+# calculate distributionUrl, requires .mvn/wrapper/maven-wrapper.properties
+$distributionUrl = (Get-Content -Raw "$scriptDir/.mvn/wrapper/maven-wrapper.properties" | ConvertFrom-StringData).distributionUrl
+if (!$distributionUrl) {
+  Write-Error "cannot read distributionUrl property in $scriptDir/.mvn/wrapper/maven-wrapper.properties"
+}
+
+switch -wildcard -casesensitive ( $($distributionUrl -replace '^.*/','') ) {
+  "maven-mvnd-*" {
+    $USE_MVND = $true
+    $distributionUrl = $distributionUrl -replace '-bin\.[^.]*$',"-windows-amd64.zip"
+    $MVN_CMD = "mvnd.cmd"
+    break
+  }
+  default {
+    $USE_MVND = $false
+    $MVN_CMD = $script -replace '^mvnw','mvn'
+    break
+  }
+}
+
+# apply MVNW_REPOURL and calculate MAVEN_HOME
+# maven home pattern: ~/.m2/wrapper/dists/{apache-maven-<version>,maven-mvnd-<version>-<platform>}/<hash>
+if ($env:MVNW_REPOURL) {
+  $MVNW_REPO_PATTERN = if ($USE_MVND) { "/org/apache/maven/" } else { "/maven/mvnd/" }
+  $distributionUrl = "$env:MVNW_REPOURL$MVNW_REPO_PATTERN$($distributionUrl -replace '^.*'+$MVNW_REPO_PATTERN,'')"
+}
+$distributionUrlName = $distributionUrl -replace '^.*/',''
+$distributionUrlNameMain = $distributionUrlName -replace '\.[^.]*$','' -replace '-bin$',''
+$MAVEN_HOME_PARENT = "$HOME/.m2/wrapper/dists/$distributionUrlNameMain"
+if ($env:MAVEN_USER_HOME) {
+  $MAVEN_HOME_PARENT = "$env:MAVEN_USER_HOME/wrapper/dists/$distributionUrlNameMain"
+}
+$MAVEN_HOME_NAME = ([System.Security.Cryptography.MD5]::Create().ComputeHash([byte[]][char[]]$distributionUrl) | ForEach-Object {$_.ToString("x2")}) -join ''
+$MAVEN_HOME = "$MAVEN_HOME_PARENT/$MAVEN_HOME_NAME"
+
+if (Test-Path -Path "$MAVEN_HOME" -PathType Container) {
+  Write-Verbose "found existing MAVEN_HOME at $MAVEN_HOME"
+  Write-Output "MVN_CMD=$MAVEN_HOME/bin/$MVN_CMD"
+  exit $?
+}
+
+if (! $distributionUrlNameMain -or ($distributionUrlName -eq $distributionUrlNameMain)) {
+  Write-Error "distributionUrl is not valid, must end with *-bin.zip, but found $distributionUrl"
+}
+
+# prepare tmp dir
+$TMP_DOWNLOAD_DIR_HOLDER = New-TemporaryFile
+$TMP_DOWNLOAD_DIR = New-Item -Itemtype Directory -Path "$TMP_DOWNLOAD_DIR_HOLDER.dir"
+$TMP_DOWNLOAD_DIR_HOLDER.Delete() | Out-Null
+trap {
+  if ($TMP_DOWNLOAD_DIR.Exists) {
+    try { Remove-Item $TMP_DOWNLOAD_DIR -Recurse -Force | Out-Null }
+    catch { Write-Warning "Cannot remove $TMP_DOWNLOAD_DIR" }
+  }
+}
+
+New-Item -Itemtype Directory -Path "$MAVEN_HOME_PARENT" -Force | Out-Null
+
+# Download and Install Apache Maven
+Write-Verbose "Couldn't find MAVEN_HOME, downloading and installing it ..."
+Write-Verbose "Downloading from: $distributionUrl"
+Write-Verbose "Downloading to: $TMP_DOWNLOAD_DIR/$distributionUrlName"
+
+$webclient = New-Object System.Net.WebClient
+if ($env:MVNW_USERNAME -and $env:MVNW_PASSWORD) {
+  $webclient.Credentials = New-Object System.Net.NetworkCredential($env:MVNW_USERNAME, $env:MVNW_PASSWORD)
+}
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$webclient.DownloadFile($distributionUrl, "$TMP_DOWNLOAD_DIR/$distributionUrlName") | Out-Null
+
+# If specified, validate the SHA-256 sum of the Maven distribution zip file
+$distributionSha256Sum = (Get-Content -Raw "$scriptDir/.mvn/wrapper/maven-wrapper.properties" | ConvertFrom-StringData).distributionSha256Sum
+if ($distributionSha256Sum) {
+  if ($USE_MVND) {
+    Write-Error "Checksum validation is not supported for maven-mvnd. `nPlease disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties."
+  }
+  Import-Module $PSHOME\Modules\Microsoft.PowerShell.Utility -Function Get-FileHash
+  if ((Get-FileHash "$TMP_DOWNLOAD_DIR/$distributionUrlName" -Algorithm SHA256).Hash.ToLower() -ne $distributionSha256Sum) {
+    Write-Error "Error: Failed to validate Maven distribution SHA-256, your Maven distribution might be compromised. If you updated your Maven version, you need to update the specified distributionSha256Sum property."
+  }
+}
+
+# unzip and move
+Expand-Archive "$TMP_DOWNLOAD_DIR/$distributionUrlName" -DestinationPath "$TMP_DOWNLOAD_DIR" | Out-Null
+Rename-Item -Path "$TMP_DOWNLOAD_DIR/$distributionUrlNameMain" -NewName $MAVEN_HOME_NAME | Out-Null
+try {
+  Move-Item -Path "$TMP_DOWNLOAD_DIR/$MAVEN_HOME_NAME" -Destination $MAVEN_HOME_PARENT | Out-Null
+} catch {
+  if (! (Test-Path -Path "$MAVEN_HOME" -PathType Container)) {
+    Write-Error "fail to move MAVEN_HOME"
+  }
+} finally {
+  try { Remove-Item $TMP_DOWNLOAD_DIR -Recurse -Force | Out-Null }
+  catch { Write-Warning "Cannot remove $TMP_DOWNLOAD_DIR" }
+}
+
+Write-Output "MVN_CMD=$MAVEN_HOME/bin/$MVN_CMD"
+</file>
+
+<file path="pom.xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.9</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.oumeima</groupId>
+	<artifactId>product-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>product-service</name>
+	<description>product-service</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+		<spring-cloud.version>2023.0.5</spring-cloud.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.17.0</version>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.36</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/controller/ProductController.java">
+package com.oumeima.productservice.controller;
+
+import com.oumeima.productservice.model.Category;
+import com.oumeima.productservice.repository.CategoryRepository;
+import com.oumeima.productservice.request.ProductPurchaseRequest;
+import com.oumeima.productservice.request.ProductRequest;
+import com.oumeima.productservice.response.ProductPurchaseResponse;
+import com.oumeima.productservice.response.ProductResponse;
+import com.oumeima.productservice.service.ProductService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/products")
+@RequiredArgsConstructor
+public class ProductController {
+    private final ProductService service;
+    private final CategoryRepository categoryRepository;
+
+    @PostMapping
+    public ResponseEntity<String> createProduct(
+            @RequestBody @Valid ProductRequest request
+    ) {
+        return ResponseEntity.ok(service.createProduct(request));
+    }
+
+    @PostMapping("/purchase")
+    public ResponseEntity<List<ProductPurchaseResponse>> purchaseProducts(
+            @RequestBody List<ProductPurchaseRequest> request
+    ) {
+        return ResponseEntity.ok(service.purchaseProducts(request));
+    }
+
+    @GetMapping("/{product-id}")
+    public ResponseEntity<ProductResponse> findById(
+            @PathVariable("product-id") String productId
+    ) {
+        return ResponseEntity.ok(service.findById(productId));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> findAll() {
+        return ResponseEntity.ok(service.findAll());
+    }
+    @PostMapping(value = "/cover/{product-id}", consumes = "multipart/form-data")
+    public ResponseEntity<?> uploadProductCoverPicture(
+            @PathVariable("product-id") String bookId,
+
+            @RequestPart("file") MultipartFile file
+
+    ) {
+        service.uploadBookCoverPicture(file, bookId);
+        return ResponseEntity.accepted().build();
+    }
+    @GetMapping("/categories")
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+    @DeleteMapping("/{product-id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable("product-id") String productId) {
+        service.deleteProduct(productId);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{product-id}")
+    public ResponseEntity<Void> updateProduct(
+            @PathVariable("product-id") String productId,
+            @RequestBody @Valid ProductRequest request
+    ) {
+        service.updateProduct(productId, request);
+        return ResponseEntity.noContent().build();
+    }
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/exception/ProductNotFoundException.java">
+package com.oumeima.productservice.exception;
+
+public class ProductNotFoundException extends RuntimeException{
+    public ProductNotFoundException(String message) {
+        super(message);
+    }
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/file/FileStorageService.java">
+package com.oumeima.productservice.file;
+import jakarta.annotation.Nonnull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static java.io.File.separator;
+import static java.lang.System.currentTimeMillis;
+@Service
+@Slf4j
+@RequiredArgsConstructor
+
+public class FileStorageService {
+    @Value("${spring.application.file.uploads.photos-output-path}")
+    private String fileUploadPath;
+
+    public String saveFile(
+            @Nonnull MultipartFile sourceFile,
+            @Nonnull String productId
+    ) {
+        final String fileUploadSubPath = "users" + separator + productId;
+        return uploadFile(sourceFile, fileUploadSubPath);
+    }
+
+    private String uploadFile(
+            @Nonnull MultipartFile sourceFile,
+            @Nonnull String fileUploadSubPath
+    ) {
+        final String finalUploadPath = fileUploadPath + separator + fileUploadSubPath;
+        File targetFolder = new File(finalUploadPath);
+
+        if (!targetFolder.exists()) {
+            boolean folderCreated = targetFolder.mkdirs();
+            if (!folderCreated) {
+                log.warn("Failed to create the target folder: " + targetFolder);
+                return null;
+            }
+        }
+        final String fileExtension = getFileExtension(sourceFile.getOriginalFilename());
+        String targetFilePath = finalUploadPath + separator + currentTimeMillis() + "." + fileExtension;
+        Path targetPath = Paths.get(targetFilePath);
+        try {
+            Files.write(targetPath, sourceFile.getBytes());
+            log.info("File saved to: " + targetFilePath);
+            return targetFilePath;
+        } catch (IOException e) {
+            log.error("File was not saved", e);
+        }
+        return null;
+    }
+
+    private String getFileExtension(String fileName) {
+        if (fileName == null || fileName.isEmpty()) {
+            return "";
+        }
+        int lastDotIndex = fileName.lastIndexOf(".");
+        if (lastDotIndex == -1) {
+            return "";
+        }
+        return fileName.substring(lastDotIndex + 1).toLowerCase();
+    }
+
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/file/FileUtils.java">
+package com.oumeima.productservice.file;
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+@Slf4j
+
+public class FileUtils {
+    public static byte[] readFileFromLocation(String fileUrl) {
+        if (StringUtils.isBlank(fileUrl)) {
+            return null;
+        }
+        try {
+            Path filePath = new File(fileUrl).toPath();
+            return Files.readAllBytes(filePath);
+        } catch (IOException e) {
+            log.warn("Nou file found in the path {}", fileUrl);
+        }
+        return null;
+    }
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/mapper/ProductMapper.java">
+package com.oumeima.productservice.mapper;
+
+import com.oumeima.productservice.file.FileUtils;
+import com.oumeima.productservice.model.Category;
+import com.oumeima.productservice.model.Product;
+import com.oumeima.productservice.repository.CategoryRepository;
+import com.oumeima.productservice.request.ProductRequest;
+import com.oumeima.productservice.response.ProductPurchaseResponse;
+import com.oumeima.productservice.response.ProductResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+
+public class ProductMapper {
+    private final CategoryRepository categoryRepository;
+    public Product toProduct(ProductRequest request) {
+        Category fullCategory = categoryRepository.findById(request.categoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        return Product.builder()
+                .id(request.id())
+                .name(request.name())
+                .description(request.description())
+                .availableQuantity(request.availableQuantity())
+                .price(request.price())
+                .category(fullCategory)
+                .build();
+    }
+
+    public ProductResponse toProductResponse(Product product) {
+        return new ProductResponse(
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+
+                product.getAvailableQuantity(),
+                product.getPrice(),
+                product.getCategory().getId(),
+                product.getCategory().getName(),
+
+                product.getCategory().getDescription(),
+                FileUtils.readFileFromLocation(product.getProductCover())
+        );
+    }
+
+    public ProductPurchaseResponse toproductPurchaseResponse(Product product, double quantity) {
+        return new ProductPurchaseResponse(
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
+                quantity
+        );
+    }
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/model/Category.java">
+package com.oumeima.productservice.model;
+
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
+@Document
+
+public class Category {
+    @Id
+
+    private String id;
+    private String name;
+    private String description;
+
+
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/model/Product.java">
+package com.oumeima.productservice.model;
+
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.math.BigDecimal;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
+@Document
+
+
+public class Product {
+    @Id
+    private String id;
+    private String name;
+    private String description;
+    private double availableQuantity;
+    private BigDecimal price;
+
+
+    private Category category;
+    private String productCover;
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/ProductServiceApplication.java">
+package com.oumeima.productservice;
+
+import com.oumeima.productservice.model.Category;
+import com.oumeima.productservice.model.Product;
+import com.oumeima.productservice.repository.CategoryRepository;
+import com.oumeima.productservice.repository.ProductRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@SpringBootApplication
+public class ProductServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProductServiceApplication.class, args);
+	}
+	@Bean
+	CommandLineRunner initDatabase(CategoryRepository categoryRepository, ProductRepository productRepository) {
+		return args -> {
+			if (categoryRepository.count() == 0) { // Prevent duplicate seeding
+				Category electronics = categoryRepository.save(new Category(null, "Electronics", "Devices and gadgets"));
+				Category clothing = categoryRepository.save(new Category(null, "Clothing", "Fashion and apparel"));
+
+				productRepository.saveAll(List.of(
+						new Product(null, "Laptop", "Gaming laptop", 10, new BigDecimal("1500.00"), electronics,null),
+						new Product(null, "Smartphone", "Latest Android phone", 20, new BigDecimal("800.00"), electronics,null),
+						new Product(null, "T-Shirt", "Cotton T-shirt", 50, new BigDecimal("20.00"), clothing,null)
+				));
+			}
+		};
+	}
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/repository/CategoryRepository.java">
+package com.oumeima.productservice.repository;
+
+import com.oumeima.productservice.model.Category;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface CategoryRepository extends MongoRepository<Category, String> {
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/repository/ProductRepository.java">
+package com.oumeima.productservice.repository;
+
+import com.oumeima.productservice.model.Product;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+
+public interface ProductRepository extends MongoRepository<Product, String> {
+    List<Product> findAllByIdInOrderById(List<String> ids);
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/request/ProductPurchaseRequest.java">
+package com.oumeima.productservice.request;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+public record ProductPurchaseRequest(
+        @NotNull(message = "Product is mandatory")
+        String productId,
+        @Positive(message = "Quantity is mandatory")
+        double quantity
+) {
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/request/ProductRequest.java">
+package com.oumeima.productservice.request;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+import java.math.BigDecimal;
+
+public record ProductRequest(
+
+        String id,
+        @NotNull(message = "Product name is required")
+        String name,
+        @NotNull(message = "Product description is required")
+        String description,
+        @Positive(message = "Available quantity should be positive")
+        double availableQuantity,
+        @Positive(message = "Price should be positive")
+        BigDecimal price,
+        @NotNull(message = "Product category is required")
+        String categoryId
+) {
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/response/ProductPurchaseResponse.java">
+package com.oumeima.productservice.response;
+
+import java.math.BigDecimal;
+
+public record ProductPurchaseResponse(
+        String productId,
+        String name,
+        String description,
+        BigDecimal price,
+        double quantity
+) {
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/response/ProductResponse.java">
+package com.oumeima.productservice.response;
+
+import java.math.BigDecimal;
+
+public record ProductResponse(
+        String id,
+        String name,
+        String description,
+        double availableQuantity,
+        BigDecimal price,
+        String categoryId,
+        String categoryName,
+        String categoryDescription,
+        byte[] cover
+) {
+}
+</file>
+
+<file path="src/main/java/com/oumeima/productservice/service/ProductService.java">
+package com.oumeima.productservice.service;
+
+import com.oumeima.productservice.exception.ProductNotFoundException;
+import com.oumeima.productservice.file.FileStorageService;
+import com.oumeima.productservice.mapper.ProductMapper;
+import com.oumeima.productservice.model.Category;
+import com.oumeima.productservice.model.Product;
+import com.oumeima.productservice.repository.CategoryRepository;
+import com.oumeima.productservice.repository.ProductRepository;
+import com.oumeima.productservice.request.ProductPurchaseRequest;
+import com.oumeima.productservice.request.ProductRequest;
+import com.oumeima.productservice.response.ProductPurchaseResponse;
+import com.oumeima.productservice.response.ProductResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+
+public class ProductService {
+    private final ProductRepository repository;
+    private final ProductMapper mapper;
+    private final FileStorageService fileStorageService;
+    private final CategoryRepository categoryRepository;
+    public String createProduct(ProductRequest request) {
+        var product = this.repository.save(mapper.toProduct(request));
+        return product.getId();
+
+    }
+
+    public ProductResponse findById(String productId) {
+        return repository.findById(productId)
+                .map(mapper::toProductResponse)
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with ID:: " + productId));
+    }
+
+    public List<ProductResponse> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::toProductResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional()
+    public List<ProductPurchaseResponse> purchaseProducts(
+            List<ProductPurchaseRequest> request
+    ) {
+        var productIds = request
+                .stream()
+                .map(ProductPurchaseRequest::productId)
+                .toList();
+        var storedProducts = repository.findAllByIdInOrderById(productIds);
+        if (productIds.size() != storedProducts.size()) {
+            throw new RuntimeException("One or more products does not exist");
+        }
+        var sortedRequest = request
+                .stream()
+                .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
+                .toList();
+        var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
+        for (int i = 0; i < storedProducts.size(); i++) {
+            var product = storedProducts.get(i);
+            var productRequest = sortedRequest.get(i);
+            if (product.getAvailableQuantity() < productRequest.quantity()) {
+                throw new RuntimeException("Insufficient stock quantity for product with ID:: " + productRequest.productId());
+            }
+            var newAvailableQuantity = product.getAvailableQuantity() - productRequest.quantity();
+            product.setAvailableQuantity(newAvailableQuantity);
+            repository.save(product);
+            purchasedProducts.add(mapper.toproductPurchaseResponse(product, productRequest.quantity()));
+        }
+        return purchasedProducts;
+    }
+
+    public void uploadBookCoverPicture(MultipartFile file, String productId) {
+        Product product = repository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("No product found with ID:: " + productId));
+
+        var profilePicture = fileStorageService.saveFile(file, productId);
+        product.setProductCover(profilePicture);
+        repository.save(product);
+    }
+
+    public void deleteProduct(String productId) {
+        repository.deleteById(productId);
+    }
+
+    public void updateProduct(String productId, ProductRequest request) {
+        Product existingProduct = repository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        Category category = categoryRepository.findById(request.categoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        existingProduct.setName(request.name());
+        existingProduct.setDescription(request.description());
+        existingProduct.setAvailableQuantity(request.availableQuantity());
+        existingProduct.setPrice(request.price());
+        existingProduct.setCategory(category);
+
+       repository.save(existingProduct);
+    }
+}
+</file>
+
+<file path="src/main/resources/application.yml">
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+  servlet:
+    multipart:
+      max-file-size: 50MB
+  application:
+    name: product-service
+    file:
+      uploads:
+        photos-output-path: ./uploads
+</file>
+
+<file path="src/main/resources/application.yml~">
+spring:
+  data:
+    mongodb:
+      username: attia
+      password: attia
+      host: localhost
+      port: 27017
+      database: product
+      authentication-database: admin
+  servlet:
+    multipart:
+      max-file-size: 50MB
+  application:
+    name: product-service
+    file:
+      uploads:
+        photos-output-path: ./uploads
+
+
+
+server:
+  port: 8040
+</file>
+
+<file path="src/test/java/com/oumeima/productservice/ProductServiceApplicationTests.java">
+package com.oumeima.productservice;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ProductServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
+</file>
+
+</files>

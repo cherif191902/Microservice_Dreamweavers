@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      username: attia
+      password: attia
+      host: localhost
+      port: 27017
+      database: product
+      authentication-database: admin
+  servlet:
+    multipart:
+      max-file-size: 50MB
+  application:
+    name: product-service
+    file:
+      uploads:
+        photos-output-path: ./uploads
+
+
+
+server:
+  port: 8040
