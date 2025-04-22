@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled : true
+      routes:
+        - id: reclamation-service
+          uri: lb:http://RECLAMATION-SERVICE
+          predicates:
+            - Path=/api/v1/reclamations/**
+
+
+server:
+  port: 8222
