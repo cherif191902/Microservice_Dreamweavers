@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled : true
+      routes:
+        - id : event-service
+          uri: lb:http://EVENT-SERVICE
+          predicates:
+            - Path=/api/v1/events/**
+
+
+server:
+  port: 8222

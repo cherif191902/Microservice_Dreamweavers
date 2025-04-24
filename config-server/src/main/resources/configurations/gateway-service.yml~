@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled : true
+      routes:
+        - id : authentication-service
+          uri: lb:http://AUTHENTICATION-SERVICE
+          predicates:
+            - Path=/api/v1/auth/**
+        - id: django-microservice
+          uri: http://192.168.50.1:8000
+          predicates:
+            - Path=/api/v1/django/**  # Route requests to Django
+          filters:
+            - RewritePath=/api/v1/django/(?<remaining>.*), /$\{remaining}
+        - id: nest-microservice-1
+          uri: lb://NEST-MICROSERVICE # Eureka-based routing
+          predicates:
+              - Path=/api/v1/nest/**
+          filters:
+              - RewritePath=/api/v1/nest/(?<remaining>.*), /$\{remaining}
+
+server:
+  port: 8222
