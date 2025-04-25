@@ -2,6 +2,6 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
   stripe:
-    secret-key: sk_test_51QCAHpBDW3LkkcbKFv9eNqLWddEC9JLkjAoZkB6VC6e52cHjojXS5vlEoWlZQWCeeAaN67bpZllUrR9RWehULuup00lCYHx3bX
+    secret-key:${STRIPE_SECRET_KEY}
   application:
     name: payment-service
